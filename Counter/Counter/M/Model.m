@@ -8,35 +8,36 @@
 #import "Model.h"
 
 @implementation Model
--(void)NumPushInn:(double)num{
-    if(_numArray.count == 50){
+
+-(void)numPushInn:(double)num {
+    if (_numArray.count == 50) {
         return;
     }
     [_numArray insertObject:[NSString stringWithFormat:@"%f",num] atIndex:_numArray.count ];
     return;
 }
--(void)SympolPushInn:(char)ch{
-    if(_symbolArray.count == 50){
+-(void)sympolPushInn:(char)ch {
+    if (_symbolArray.count == 50) {
         return;
     }
     [_symbolArray insertObject:[NSString stringWithFormat:@"%c",ch] atIndex:_symbolArray.count];
     return;
 }
--(void)NumOutInn:(NSMutableArray *)s{
+-(void)numOutInn:(NSMutableArray *)s {
     [_numArray removeObjectAtIndex:([_numArray count] - 1)];
 }
--(void)SympolOutInn:(NSMutableArray *)s{
+-(void)sympolOutInn:(NSMutableArray *)s {
     [_symbolArray removeObjectAtIndex:([_symbolArray count] - 1)];
 }
--(int)judge:(char)ch and:(char *)a{
-    for(int i = 0; i < 7; i++) {
-        if(ch == a[i]) {
+-(int)judge:(char)ch and:(char *)a {
+    for (int i = 0; i < 7; i++) {
+        if (ch == a[i]) {
             return 1;
         }
     }
     return 0;
 }
--(char)compare:(char)ch1{
+-(char)compare:(char)ch1 {
     int first[7][7] = {
                 { 2, 2, 1, 1, 1, 2, 2 },
                 { 2, 2, 1, 1, 1, 2, 2 },
@@ -74,12 +75,12 @@
     return ch;
 }
 
-- (double)Change:(NSMutableString *)s {
+- (double)change:(NSMutableString *)s {
     int firstFlag = 0, secondFlag = 0;
     double sum = 0, num = 0;
     if ([s characterAtIndex:0] == '-') {
         firstFlag = 1;
-    }else{//因为要考虑负号的情况 所以必须从第二个开始考虑 并且不能直接把值赋给sum 因为可能有两位数的情况如果直接赋值那么sum一加就出现两位数相加的情况
+    } else {//因为要考虑负号的情况 所以必须从第二个开始考虑 并且不能直接把值赋给sum 因为可能有两位数的情况如果直接赋值那么sum一加就出现两位数相加的情况
         num = [s characterAtIndex:0] - '0';
     }
     if (s.length > 1) {
@@ -91,52 +92,51 @@
                 i++;
                 num = 0.1 * ((double)[s characterAtIndex:i] - '0');
                 continue;
-            }else{
+            } else {
                 if (secondFlag == 0) {
                     num = num * 10 + (double)[s characterAtIndex:i] - '0';
-                }else{
+                } else {
                     secondFlag++;
                     num = num + ((double)[s characterAtIndex:i] - '0') * pow(10, -secondFlag);
                 }
             }
         }
         sum += num;
-    }
+    } else {
     //这个else感觉用不到 因为传进来的是char型的 长度一定大于1
-    else{
         sum = [s characterAtIndex:0] - '0';
     }
     if (firstFlag) {
         sum *= -1;
-    }else{
+    } else {
         sum = sum;
     }
     return sum;
 }
 
--(double)calculate{
+-(double)calculate {
     double testResult = 0;
     double num1,num2;
     char ch = '\0';
-    num1 = [self Change:_numArray[_numArray.count - 2]];
-    num2 = [self Change:_numArray[_numArray.count - 1]];
+    num1 = [self change:_numArray[_numArray.count - 2]];
+    num2 = [self change:_numArray[_numArray.count - 1]];
     
-    if([_symbolArray[_symbolArray.count - 1] isEqual:@"+"]){
+    if ([_symbolArray[_symbolArray.count - 1] isEqual:@"+"]) {
         ch = '+';
     }
     
-    if([_symbolArray[_symbolArray.count - 1] isEqual:@"-"]){
+    if ([_symbolArray[_symbolArray.count - 1] isEqual:@"-"]) {
         ch = '-';
     }
 
-    if([_symbolArray[_symbolArray.count - 1] isEqual:@"x"]){
+    if ([_symbolArray[_symbolArray.count - 1] isEqual:@"x"]) {
         ch = '*';
     }
 
-    if([_symbolArray[_symbolArray.count - 1] isEqual:@"/"]){
+    if ([_symbolArray[_symbolArray.count - 1] isEqual:@"/"]) {
         ch = '/';
     }
-
+    
     switch (ch) {
         case '+':
             testResult = num1 + num2;
@@ -153,14 +153,14 @@
     }
     return testResult;
 }
--(int)count:(char *)a{
+-(int)count:(char *)a {
     char ch;
     double data, result, i = 0, flag = 0, flag1 = 0,temp = 0;
     int index = 1;
-    [self SympolPushInn:'#'];
+    [self sympolPushInn:'#'];
     ch = [_test characterAtIndex:i];
     while (ch != '#' || ![_symbolArray[_symbolArray.count - 1]  isEqual: @"#"]) {
-        if(![self judge:ch and:a] || (i == 0 && ch == '-')){//如果读入数字
+        if (![self judge:ch and:a] || (i == 0 && ch == '-')) {//如果读入数字
             index = 1;
             if ((i == 0 && ch == '-')) {
                 flag = 1;
@@ -172,7 +172,7 @@
             i++;
             ch = [_test characterAtIndex:i];
             while (![self judge:ch and:a]) {
-                if (ch == '.'){
+                if (ch == '.') {
                     flag1 = 1;
                     i++;
                     ch = [_test characterAtIndex:i];
@@ -182,9 +182,9 @@
                    temp = (ch - '0') * pow(10, -index);
                     index++;
                     data += temp;
-                }else{
+                } else {
                 data = data * 10 + ch - '0';
-            }
+              }
                 i++;
                 ch = [_test characterAtIndex:i];
             }
@@ -193,25 +193,25 @@
                 flag = 0;
             }
             flag1 = 0;
-            [self NumPushInn:data];
-        }else{
+            [self numPushInn:data];
+        } else {
             switch ([self compare:ch]) {
                 case '>':
-                    [self SympolPushInn:ch];
+                    [self sympolPushInn:ch];
                     i++;
                     ch = [_test characterAtIndex:i];
                     break;
                 case '=':
-                    [self SympolOutInn:_symbolArray];
+                    [self sympolOutInn:_symbolArray];
                     i++;
                     ch = [_test characterAtIndex:i];
                     break;
                 case '<':
                     result = [self calculate];
-                    [self SympolOutInn:_symbolArray];
-                    [self NumOutInn:_numArray];
-                    [self NumOutInn:_numArray];
-                    [self NumPushInn:result];
+                    [self sympolOutInn:_symbolArray];
+                    [self numOutInn:_numArray];
+                    [self numOutInn:_numArray];
+                    [self numPushInn:result];
                     break;
             }
         }

@@ -10,7 +10,7 @@
 
 @implementation View
 
--(instancetype)initWithFrame:(CGRect)frame{
+-(instancetype)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
     
@@ -46,75 +46,75 @@
                         make.height.equalTo(@90);
                     make.width.equalTo(@90);
                 }];
-            if(i == 0 && j != 3){
+            if (i == 0 && j != 3) {
                 _oneButton.backgroundColor = [UIColor colorWithRed:0.61 green:0.61 blue:0.61 alpha:1];
-                if(j == 0){
+                if (j == 0) {
                     [_oneButton setTitle:@"AC" forState:UIControlStateNormal];
                     _oneButton.tag = 18;
                 }
-                if(j == 1){
+                if (j == 1) {
                     [_oneButton setTitle:@"(" forState:UIControlStateNormal];
                     _oneButton.tag = 16;
                 }
-                if(j == 2){
+                if (j == 2) {
                     [_oneButton setTitle:@")" forState:UIControlStateNormal];
                     _oneButton.tag = 17;
                 }
             }
-            if(j == 3){
+            if (j == 3) {
                 _oneButton.backgroundColor = [UIColor colorWithRed:0.9 green:0.565 blue:0.243 alpha:1];
-                if(i == 0){
+                if (i == 0) {
                     [_oneButton setTitle:@"÷" forState:UIControlStateNormal];
                     _oneButton.tag = 15;
                 }
-                if(i == 1){
+                if (i == 1) {
                     [_oneButton setTitle:@"×" forState:UIControlStateNormal];
                     _oneButton.tag = 14;
                 }
-                if(i == 2){
+                if (i == 2) {
                     [_oneButton setTitle:@"-" forState:UIControlStateNormal];
                     _oneButton.tag = 13;
                 }
-                if(i == 3){
+                if (i == 3) {
                     [_oneButton setTitle:@"+" forState:UIControlStateNormal];
                     _oneButton.tag = 12;
                 }
             }
-            if(i != 0 && j != 3){
+            if (i != 0 && j != 3) {
                 _oneButton.backgroundColor = [UIColor colorWithRed:0.149 green:0.149 blue:0.149 alpha:1];
-                if(i == 1 && j == 0){
+                if (i == 1 && j == 0) {
                     [_oneButton setTitle:@"7" forState:UIControlStateNormal];
                     _oneButton.tag = 7;
                 }
-                if(i == 1 && j == 1){
+                if (i == 1 && j == 1) {
                     [_oneButton setTitle:@"8" forState:UIControlStateNormal];
                     _oneButton.tag = 8;
                 }
-                if(i == 1 && j == 2){
+                if (i == 1 && j == 2) {
                     [_oneButton setTitle:@"9" forState:UIControlStateNormal];
                     _oneButton.tag = 9;
                 }
-                if(i == 2 && j == 0){
+                if (i == 2 && j == 0) {
                     [_oneButton setTitle:@"4" forState:UIControlStateNormal];
                     _oneButton.tag = 4;
                 }
-                if(i == 2 && j == 1){
+                if (i == 2 && j == 1) {
                     [_oneButton setTitle:@"5" forState:UIControlStateNormal];
                     _oneButton.tag = 5;
                 }
-                if(i == 2 && j == 2){
+                if (i == 2 && j == 2) {
                     [_oneButton setTitle:@"6" forState:UIControlStateNormal];
                     _oneButton.tag = 6;
                 }
-                if(i == 3 && j == 0){
+                if (i == 3 && j == 0) {
                     [_oneButton setTitle:@"1" forState:UIControlStateNormal];
                     _oneButton.tag = 1;
                 }
-                if(i == 3 && j == 1){
+                if (i == 3 && j == 1) {
                     [_oneButton setTitle:@"2" forState:UIControlStateNormal];
                     _oneButton.tag = 2;
                 }
-                if(i == 3 && j == 2){
+                if (i == 3 && j == 2) {
                     [_oneButton setTitle:@"3" forState:UIControlStateNormal];
                     _oneButton.tag = 3;
                 }
@@ -177,10 +177,10 @@
     return self;
     
 }
--(void)press{
+-(void)press {
     NSLog(@"111");
 }
--(void)click:(UIButton *)button{
+-(void)click:(UIButton *)button {
     [_delegate click:button];
 }
 @end
